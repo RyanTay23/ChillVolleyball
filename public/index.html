@@ -6,47 +6,30 @@
     <link rel="apple-touch-icon" sizes="180x180" href="icons\apple-icon-180.png">
     <title>Chill Volleyball</title>
     <!-- <link rel="manifest" href="manifest.json"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script> -->
     <script src="app.js"></script>
 </head>
 <body>
+    <!-- <div class="splashScreen">
+        <img id="logo" src="./icons/favicon.ico" alt="logo">
+        <button id="googleSignInBtn">Sign in with Google</button>
+    </div> -->
+
     <button id="installBtn">Install App</button>
+
     <div class="topContainer">
         <div id="timer">00:00:00</div>
     </div>
     
     <div class="botContainer">
-        <button id="startSesh" onclick="logArrival(), startTimer()">Start Session</button>
+        <button id="startSesh" onclick="logArrival()">Start Session</button>
         <button id="endSesh" onclick="stopTimer()">End Session</button>
     </div>
 
-    <script>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js');
-        }
-    </script>
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-            apiKey: "AIzaSyAKzwVOCg-4sv88dS991lGGTmmLQkkYfUc",
-            authDomain: "chillvolleyball-d1394.firebaseapp.com",
-            projectId: "chillvolleyball-d1394",
-            storageBucket: "chillvolleyball-d1394.firebasestorage.app",
-            messagingSenderId: "444423349699",
-            appId: "1:444423349699:web:45fbdb5cbeeb9a81a38976",
-            measurementId: "G-ZR758VFKBM"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-    </script>
+    <script type="module" src="firebase.js"></script>
 </body>
 </html>

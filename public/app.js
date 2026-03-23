@@ -1,4 +1,3 @@
-
 //---------------------------------------------------------
 // INSTALL BUTTON
 //---------------------------------------------------------
@@ -52,9 +51,10 @@ function logArrival() {
     if (getDistance(lat, lon, courtLat, courtLon) <= allowedRadius) {
         startBtn.style.display = 'none';
         endBtn.style.display = 'block';
+        startTimer();
         // Save arrival to database
     } else {
-      alert(`Your coordinates are (${lat}, ${lon}). You are not at the court!`);
+      alert(`You are not at the court!`);
     }
   });
 }
@@ -99,5 +99,26 @@ function updateTimer() {
 
 function stopTimer() {
   clearInterval(timerInterval);
-  alert(`Session ended. Total time: ${(elapsedTime / 60000).toFixed(2)} minutes.`);
+  document.getElementById('timer').innerText = '00:00:00';
+  const duration = msToHMS(elapsedTime);
+  showAlert(`Session duration: ${duration.hours}h ${duration.minutes}m ${duration.seconds}s`);
+}
+
+function msToHMS(ms) {
+  let totalSeconds = Math.floor(ms / 1000);
+  let hours = Math.floor(totalSeconds / 3600);
+  let minutes = Math.floor((totalSeconds % 3600) / 60);
+  let seconds = totalSeconds % 60;
+
+  return { hours, minutes, seconds };
+}
+
+//---------------------------------------------------------
+// ALERT
+//---------------------------------------------------------
+function showAlert(message) {
+    const alertBox = document.createElement('div');
+    alertBox.textContent = message;
+    alertBox.classList.add('alerts');
+    document.body.appendChild(alertBox);
 }

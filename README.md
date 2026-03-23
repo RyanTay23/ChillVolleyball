@@ -11,6 +11,5 @@
 
 ## TODO
 
-- error: manifest.json goes to index.html
-- Add database
-- Host the site
+- Google Sign-In
+  
