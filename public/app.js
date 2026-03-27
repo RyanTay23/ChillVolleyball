@@ -1,9 +1,33 @@
 //---------------------------------------------------------
-// INSTALL BUTTON
+// PROMPT TOGGLING
+//---------------------------------------------------------
+function closePrompt() {
+    const prompt = document.getElementsByClassName('prompt');
+    for (let i = 0; i < prompt.length; i++) {
+        prompt[i].classList.add('hide');
+    }
+    const container = document.getElementsByClassName('container');
+    for (let i = 0; i < container.length; i++) {
+        container[i].classList.remove('blur');
+    }
+}
+
+function showPrompt(){
+    const prompt = document.getElementsByClassName('prompt');
+    for (let i = 0; i < prompt.length; i++) {
+        prompt[i].classList.remove('hide');
+    }
+    const container = document.getElementsByClassName('container');
+    for (let i = 0; i < container.length; i++) {
+        container[i].classList.add('blur');
+    }
+}
+
+//---------------------------------------------------------
+// INSTALL PROMPT
 //---------------------------------------------------------
 let deferredPrompt;
 
-// Detect if app is already installed
 window.addEventListener('appinstalled', () => {
   console.log('PWA installed');
 });
@@ -15,14 +39,17 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
   // Show your custom install button
   const installBtn = document.getElementById('installBtn');
-  installBtn.style.display = 'block';
-
   installBtn.addEventListener('click', async () => {
-    installBtn.style.display = 'none';
-    deferredPrompt.prompt(); // Show the install prompt
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`User response: ${outcome}`);
-    deferredPrompt = null;
+    console.log("Install button clicked");
+    // Hide install prompt
+    closePrompt();
+    // Show the default install prompt
+    deferredPrompt.prompt(); 
+    // const { outcome } = await deferredPrompt.userChoice;
+    // console.log(`User response: ${outcome}`);
+
+    //resets the prompt so it can be triggered again if needed
+    deferredPrompt = null; 
   });
 });
 
@@ -31,9 +58,6 @@ window.addEventListener('beforeinstallprompt', (e) => {
 // LOG ARRIVAL
 //---------------------------------------------------------
 function logArrival() {
-    startBtn = document.getElementById('startSesh');
-    endBtn = document.getElementById('endSesh');
-
     if (!navigator.geolocation) {
         alert("Geolocation not supported.");
         return;
@@ -49,9 +73,8 @@ function logArrival() {
     const allowedRadius = 50; // meters
 
     if (getDistance(lat, lon, courtLat, courtLon) <= allowedRadius) {
-        startBtn.style.display = 'none';
-        endBtn.style.display = 'block';
         startTimer();
+        console.log('arrived')
         // Save arrival to database
     } else {
       alert(`You are not at the court!`);
@@ -76,6 +99,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
 //---------------------------------------------------------
 // TIMER
 //---------------------------------------------------------
+let toggle = true;
 let startTime;
 let timerInterval;
 let elapsedTime = 0; // milliseconds
@@ -101,7 +125,7 @@ function stopTimer() {
   clearInterval(timerInterval);
   document.getElementById('timer').innerText = '00:00:00';
   const duration = msToHMS(elapsedTime);
-  showAlert(`Session duration: ${duration.hours}h ${duration.minutes}m ${duration.seconds}s`);
+  alert(`Session duration: ${duration.hours}h ${duration.minutes}m ${duration.seconds}s`);
 }
 
 function msToHMS(ms) {
@@ -113,12 +137,35 @@ function msToHMS(ms) {
   return { hours, minutes, seconds };
 }
 
-//---------------------------------------------------------
-// ALERT
-//---------------------------------------------------------
-function showAlert(message) {
-    const alertBox = document.createElement('div');
-    alertBox.textContent = message;
-    alertBox.classList.add('alerts');
-    document.body.appendChild(alertBox);
+function toggleTimer() {
+  if (toggle) {
+    logArrival();
+  } else {
+    stopTimer();
+  }
+  toggle = !toggle; // flip state
 }
+
+//---------------------------------------------------------
+// CLICK LISTENER
+//---------------------------------------------------------
+// document.querySelectorAll("a").forEach(link => {
+//   link.addEventListener("click", (e) => {
+//     const targetPath = link.getAttribute("href");
+//     console.log(`Clicked link to ${targetPath}`);
+//     if (location.pathname === targetPath) {
+//       // Already on this page → only trigger function
+//       e.preventDefault();
+//       console.log("Already on this page, function triggered");
+//       if (targetPath === "/timer"){
+//         console.log("toggled")
+//         toggleTimer();
+//       } 
+//     } else {
+//       // Not on this page → navigate / load section
+//       e.preventDefault(); // SPA navigation
+//       loadSection(targetPath);
+//       history.pushState({}, "", targetPath);
+//     }
+//   });
+// });

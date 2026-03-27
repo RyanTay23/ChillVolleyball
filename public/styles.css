@@ -1,94 +1,151 @@
+/* 
+------------------------
+GLOBAL
+------------------------ 
+*/
+:root {
+    --lightgrey: #DFE0E2;
+    --blueblack: #051923;
+    --brown: #423629;
+    --green: #4F5D2F;
+    --lavender: #CFD6EA;
+    --brightred: #9B1D20;
+    --darkpurple: #3D2B3D;
+    --lightgreen: #D0FFCE;
+    --lightestblue: #acecf7;
+    --lightblue: #a2d2ff;
+    --test: #B0E0E6;
+}
+
 html, body {
-    height: 100%;
+    height: 100vh;
     width: 100%;
-    /* max-width: 360px;
-    max-height: 780px; */
     margin: 0;
-    background-color: aquamarine;
-    overflow: hidden;
+    background-color: var(--lightestblue);
+    /* overflow: hidden; */
 }
 
-.topContainer {
-    height: 75%;
-    border-bottom: 1px solid black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#timer {
-    font-size: 3.5rem;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-}
-
-.botContainer {
-    height: 25%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.splashScreen {
+.container {
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    top: 0;
+    padding: 0;
+}
+
+.blur {
+    filter: blur(10px);
+    pointer-events: none;
+}
+
+/* 
+------------------------
+PROMPTS
+------------------------ 
+*/
+/* .prompt {
+    display: flex; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 0.5px solid gray;
+    border-radius: 20px;
+    width: 80vw;
+    padding: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 13px;
+    z-index: 100;
+}
+
+.hide {
+    display: none;
+} */
+
+/* 
+------------------------
+INSTALL PROMPT
+------------------------ 
+*/
+
+#installBtn {
+    background-color: var(--lavender);
+    width: 40%;
+    border: 1px groove darkgray;
+    border-radius: 5px;
+}
+
+/* 
+------------------------
+PROFILE
+------------------------ 
+*/
+#profile {
+    width: 3.5em;
+    position: fixed;
+    right: 0;
+    margin: 10px;
+}
+
+#pfp {
     width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+
+/* 
+------------------------
+TIMER PAGE
+------------------------ 
+*/
+.timer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: absolute;
+    gap: 20px;
+    
+}
+
+#timer {
+    font-size: 3em;
+}
+
+/* 
+------------------------
+NAVBAR
+------------------------ 
+*/
+.vr {
+    border-left: 1px solid blue;
+    height: 70%;
+}
+
+nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 7vh;
+    background-color: darkcyan;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     z-index: 999;
-    background-color: aquamarine;
-    transition: opacity 2.5s ease; /* fade duration */
-    opacity: 1;
 }
 
-.splashScreen.fade-out {
-    opacity: 0;
-    pointer-events: none; /* prevent interaction when faded out */
-}
-
-#logo {
-    height: 30%;
-    width: 70%;
-    border-radius: 50px;
-    border: 0.5px solid gray;
-    margin: 40px;
-}
-
-#googleSignInBtn {
-    height: 2.5rem;
-    width: 11rem;
-    font-size: 1rem;
-    background-color: lightgray;
-    border: 1px solid gray;
-    border-radius: 5px;
-}
-
-#installBtn {
-    display: none;
-}
-
-#startSesh{
-    height: 5rem;
-    width: 12rem;
-    font-size: 1.5rem;
-    background-color: orange;
-    border: 1px solid gray;
-    border-radius: 5px;
-}
-
-#endSesh {
-    display: none;
-    height: 5rem;
-    width: 12rem;
-    font-size: 1.5rem;
-    background-color: orange;
-    border: 1px solid gray;
-    border-radius: 5px;
-}
-
+/* 
+------------------------
+MISCELLANEOUS
+------------------------ 
+*/
 .alerts {
     position: fixed;
     top: 20%;
@@ -99,4 +156,8 @@ html, body {
     border: 1px solid gray;
     border-radius: 5px;
     text-align: center;
+}
+
+.bi {
+    font-size: 1.5em;
 }

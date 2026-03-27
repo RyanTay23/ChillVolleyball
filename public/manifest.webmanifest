@@ -1,7 +1,7 @@
 {
   "name": "Chill Volleyball",
   "short_name": "ChillVolley",
-  "start_url": "manifest.json",
+  "start_url": "/index.html",
   "icons": [
     {
     "src": "icons/manifest-icon-192.maskable.png",
@@ -28,8 +28,7 @@
       "purpose": "maskable"
     }
   ],
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "portrait",
-  "background_color": "#ffffff",
-  "theme_color": "#ff6600"
+  "background_color": "#c2f6ff"
 }

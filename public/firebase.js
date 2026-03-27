@@ -5,9 +5,8 @@ if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js');
     }
 
-
 //---------------------------------------------------------
-// FIREBASE
+// FIREBASE SERVICES
 //---------------------------------------------------------
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-analytics.js";
@@ -31,24 +30,25 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
-const splashScreen = document.querySelector('.splashScreen');
-const googleBtn = document.getElementById("googleSignInBtn");
-googleBtn.addEventListener("click", () => {
-        signInWithPopup(auth, provider)
-        .then(result => {
-            console.log("User info:", result.user);
-        })
-        .catch(err => console.error(err));
-    });
-
+//---------------------------------------------------------
+// GOOGLE OAUTH
+//---------------------------------------------------------
 onAuthStateChanged(auth, (user) => {
   if (user) {
     // User is signed in
-    splashScreen.classList.add('fade-out');
+
     console.log("Signed in user:", user.displayName, user.email);
     // You can show user info in the UI
   } else {
     // User is signed out
     console.log("No user signed in");
+    signInWithPopup(auth, provider)
   }
+  displayUser(user);
 });
+
+function displayUser(user) {
+    const profile = document.getElementById("profile");
+    const pfp = document.getElementById("pfp");
+    pfp.src = user.photoURL;
+}
