@@ -40,6 +40,12 @@ html, body {
     pointer-events: none;
 }
 
+#header {
+    position: absolute;
+    top: 3%;
+    font-size: 1.8em;
+}
+
 /* 
 ------------------------
 PROMPTS
@@ -111,12 +117,55 @@ TIMER PAGE
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    
 }
 
 #timer {
     font-size: 3em;
+}
+
+#start {
+    background-color: darkcyan;
+    border: 1px groove darkgray;
+    border-radius: 20px;
+    padding: 15px;
+    font-size: 1.3em;
+    position: absolute;
+    bottom: 10%;
+}
+
+/* 
+------------------------
+LEADERBOARD
+------------------------ 
+*/
+#leaderboard {
+    height: 80%;
+    width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 15px;
+    margin-top: 40px;
+    position: absolute;
+    top: 5%;
+    border: 1px solid black;
+    border-radius: 10px;
+    overflow-y: scroll;
+}
+
+
+#leaderboard .player {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 3.3em;
+    width: 100%;
+    gap: 25px;
+    border-bottom: 1px solid black;
+}
+
+.player img {
+    border-radius: 50%;
 }
 
 /* 
@@ -126,7 +175,7 @@ NAVBAR
 */
 .vr {
     border-left: 1px solid blue;
-    height: 70%;
+    height: 100%;
 }
 
 nav {

@@ -74,10 +74,10 @@ function logArrival() {
 
     if (getDistance(lat, lon, courtLat, courtLon) <= allowedRadius) {
         startTimer();
-        console.log('arrived')
+        console.log('Arrived at the court!');
         // Save arrival to database
     } else {
-      alert(`You are not at the court!`);
+      console.log(`You are not at the court!`);
     }
   });
 }
@@ -99,7 +99,7 @@ function getDistance(lat1, lon1, lat2, lon2) {
 //---------------------------------------------------------
 // TIMER
 //---------------------------------------------------------
-let toggle = true;
+
 let startTime;
 let timerInterval;
 let elapsedTime = 0; // milliseconds
@@ -121,12 +121,12 @@ function updateTimer() {
     `${seconds.toString().padStart(2,'0')}`;
 }
 
-function stopTimer() {
-  clearInterval(timerInterval);
-  document.getElementById('timer').innerText = '00:00:00';
-  const duration = msToHMS(elapsedTime);
-  alert(`Session duration: ${duration.hours}h ${duration.minutes}m ${duration.seconds}s`);
-}
+// function stopTimer() {
+//   clearInterval(timerInterval);
+//   document.getElementById('timer').innerText = '00:00:00';
+//   const duration = msToHMS(elapsedTime);
+//   console.log(`Session duration: ${duration.hours}h ${duration.minutes}m ${duration.seconds}s`);
+// }
 
 function msToHMS(ms) {
   let totalSeconds = Math.floor(ms / 1000);
@@ -137,35 +137,5 @@ function msToHMS(ms) {
   return { hours, minutes, seconds };
 }
 
-function toggleTimer() {
-  if (toggle) {
-    logArrival();
-  } else {
-    stopTimer();
-  }
-  toggle = !toggle; // flip state
-}
 
-//---------------------------------------------------------
-// CLICK LISTENER
-//---------------------------------------------------------
-// document.querySelectorAll("a").forEach(link => {
-//   link.addEventListener("click", (e) => {
-//     const targetPath = link.getAttribute("href");
-//     console.log(`Clicked link to ${targetPath}`);
-//     if (location.pathname === targetPath) {
-//       // Already on this page → only trigger function
-//       e.preventDefault();
-//       console.log("Already on this page, function triggered");
-//       if (targetPath === "/timer"){
-//         console.log("toggled")
-//         toggleTimer();
-//       } 
-//     } else {
-//       // Not on this page → navigate / load section
-//       e.preventDefault(); // SPA navigation
-//       loadSection(targetPath);
-//       history.pushState({}, "", targetPath);
-//     }
-//   });
-// });
+
